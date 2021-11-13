@@ -3,8 +3,7 @@
 function renderLicenseBadge(title, license) {
   if (license === "no"){
     return ``
-  } else {return `# ${title}
-  ![Github license](http://img.shields.io/badge/license-${license}-blue.svg)`
+  } else {return `![Github license](http://img.shields.io/badge/license-${license}-blue.svg)`
   }
 }
 
@@ -32,7 +31,7 @@ function renderLicenseLink(license) {
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
-  return `${renderLicenseBadge(data.title, data.license)}
+  return `# ${data.title}${renderLicenseBadge(data.title, data.license)}
 
   ## Description
   ${data.description}
