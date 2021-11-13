@@ -10,6 +10,33 @@ const questions = () => {
     return inquirer.prompt([
         {
             type: 'input',
+            name: 'github',
+            message: 'What is your GitHub username?',
+            validate: nameInput => {
+                if (nameInput) {
+                    return true;
+                } else {
+                    console.log('Please enter your GitHub username!');
+                    return false; 
+                }
+            } 
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: 'What is your email address?',
+            validate: nameInput => {
+                if (nameInput) {
+                    return true;
+                } else {
+                    console.log('Please enter your email address!');
+                    return false; 
+                }
+            }
+    
+        },
+        {
+            type: 'input',
             name: 'title',
             message: 'What is your project name?',
             validate: nameInput => {
@@ -25,20 +52,7 @@ const questions = () => {
             type: 'list',
             name: 'license',
             message: 'What kind of license should your project have?',
-            choices: ['MIT', 'GNU', 'BSD', 'None'],
-        },
-        {
-            type: 'input',
-            name: 'credits',
-            message: 'Who has contributed to the project?',
-            validate: nameInput => {
-                if (nameInput) {
-                    return true;
-                } else {
-                    console.log('Please say who contributed to the project!');
-                    return false;
-                }
-            }
+            choices: ['MIT', 'GNU', 'BSD', 'no'],
         },
         {
             type: 'input',
@@ -52,6 +66,11 @@ const questions = () => {
                     return false; 
                 }
             }
+        },
+        {
+            type: 'input',
+            name: 'screenshot',
+            message: 'Type the relative path to screenshot of project'
         },
         {
             type: 'input',
@@ -81,6 +100,11 @@ const questions = () => {
         },
         {
             type: 'input',
+            name: 'test',
+            message: 'What command should be run to run tests?'
+        },
+        {
+            type: 'input',
             name: 'contributors',
             message: 'What does the user need to know about contributing to the repo?'
         }
@@ -89,7 +113,8 @@ const questions = () => {
 
 // TODO: Create a function to write README file
 const writeFile = data => {
-    fs.writeFile('README.md', data, err => {
+
+    fs.writeFileSync('README.md', data, err => {
         // if there is an error 
         if (err) {
             console.log(err);
